@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & GPU Capstone Project Ideas</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      /* Premium Dark Theme variables */
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-tertiary: #1f2937;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-tertiary: #6b7280;
+
+      /* Fallbacks for host injected variable names */
+      --color-background-primary: var(--bg-primary);
+      --color-background-secondary: var(--bg-secondary);
+      --color-border-primary: var(--border-hover);
+      --color-border-secondary: var(--border-color);
+      --color-border-tertiary: var(--border-color);
+      --color-text-primary: var(--text-primary);
+      --color-text-secondary: var(--text-secondary);
+      --color-text-tertiary: var(--text-tertiary);
+      --border-radius-md: 8px;
+      --border-radius-lg: 16px;
+      
+      /* Accent colors */
+      --cv-color: #38bdf8;
+      --cv-glow: rgba(56, 189, 248, 0.15);
+      
+      --nlp-color: #34d399;
+      --nlp-glow: rgba(52, 211, 153, 0.15);
+      
+      --genai-color: #a78bfa;
+      --genai-glow: rgba(167, 139, 250, 0.15);
+      
+      --gpu-color: #fb923c;
+      --gpu-glow: rgba(251, 146, 60, 0.15);
+      
+      --easy-color: #10b981;
+      --medium-color: #f59e0b;
+      --hard-color: #ef4444;
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --gap: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.04) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(167, 139, 250, 0.04) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(251, 146, 60, 0.02) 0px, transparent 50%);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* Header section */
+    .header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .badge-featured {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(167, 139, 250, 0.08);
+      border: 1px solid rgba(167, 139, 250, 0.15);
+      color: var(--genai-color);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 15px rgba(167, 139, 250, 0.05);
+    }
+
+    .header h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 40%, #a78bfa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @media (min-width: 768px) {
+      .header h1 {
+        font-size: 2.75rem;
+      }
+    }
+
+    .header p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Controls: Filters + Search + Sort */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: rgba(17, 24, 39, 0.35);
+      padding: 1.25rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+    }
+
+    @media (min-width: 992px) {
+      .controls {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: var(--font-sans);
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    .filter-btn.active.all {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-btn.active.cv {
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--cv-color);
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.1);
+    }
+
+    .filter-btn.active.nlp {
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--nlp-color);
+      border-color: rgba(52, 211, 153, 0.3);
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.1);
+    }
+
+    .filter-btn.active.genai {
+      background: rgba(167, 139, 250, 0.1);
+      color: var(--genai-color);
+      border-color: rgba(167, 139, 250, 0.3);
+      box-shadow: 0 0 12px rgba(167, 139, 250, 0.1);
+    }
+
+    .filter-btn.active.gpu {
+      background: rgba(251, 146, 60, 0.1);
+      color: var(--gpu-color);
+      border-color: rgba(251, 146, 60, 0.3);
+      box-shadow: 0 0 12px rgba(251, 146, 60, 0.1);
+    }
+
+    /* Search & Sort Group */
+    .search-sort-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    @media (min-width: 576px) {
+      .search-sort-group {
+        flex-direction: row;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .search-sort-group {
+        width: auto;
+        max-width: 500px;
+        flex-grow: 1;
+        justify-content: flex-end;
+      }
+    }
+
+    .search-wrapper, .sort-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    @media (min-width: 576px) {
+      .search-wrapper {
+        flex-grow: 2;
+      }
+      .sort-wrapper {
+        flex-grow: 1;
+        max-width: 200px;
+      }
+    }
+
+    /* Search bar */
+    .search-input {
+      width: 100%;
+      padding: 9px 12px 9px 38px;
+      background: rgba(10, 14, 23, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .search-input:focus {
+      border-color: var(--genai-color);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.15);
+      background: rgba(10, 14, 23, 0.85);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--text-tertiary);
+      pointer-events: none;
+    }
+
+    .clear-search-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.15s, background-color 0.15s;
+    }
+
+    .clear-search-btn:hover {
+      color: var(--text-primary);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Sort Select dropdown */
+    .sort-select {
+      width: 100%;
+      padding: 9px 32px 9px 12px;
+      background: rgba(10, 14, 23, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      transition: all 0.2s ease;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 14px;
+    }
+
+    .sort-select:focus {
+      border-color: var(--genai-color);
+      box-shadow: 0 0 10px rgba(167, 139, 250, 0.15);
+      background: rgba(10, 14, 23, 0.85);
+    }
+
+    .sort-select option {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    /* Stats Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .stats {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .stat {
+      background: rgba(17, 24, 39, 0.35);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(17, 24, 39, 0.5);
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-icon.cv { background: rgba(56, 189, 248, 0.1); color: var(--cv-color); }
+    .stat-icon.nlp { background: rgba(52, 211, 153, 0.1); color: var(--nlp-color); }
+    .stat-icon.genai { background: rgba(167, 139, 250, 0.1); color: var(--genai-color); }
+    .stat-icon.gpu { background: rgba(251, 146, 60, 0.1); color: var(--gpu-color); }
+
+    .stat-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .stat-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat span {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* Grid & Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--gap);
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.45);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.25rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      transition: opacity 0.25s ease;
+      opacity: 0.6;
+    }
+
+    .card.cv::before { background: var(--cv-color); }
+    .card.nlp::before { background: var(--nlp-color); }
+    .card.genai::before { background: var(--genai-color); }
+    .card.gpu::before { background: var(--gpu-color); }
+
+    .card:hover {
+      transform: translateY(-4px) scale(1.005);
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(17, 24, 39, 0.6);
+    }
+
+    .card.cv:hover { box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.15); }
+    .card.nlp:hover { box-shadow: 0 10px 30px -10px rgba(52, 211, 153, 0.15); }
+    .card.genai:hover { box-shadow: 0 10px 30px -10px rgba(167, 139, 250, 0.15); }
+    .card.gpu:hover { box-shadow: 0 10px 30px -10px rgba(251, 146, 60, 0.15); }
+
+    .card.expanded {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(17, 24, 39, 0.8);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 0.75rem;
+    }
+
+    .track-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 6px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .card.cv .track-indicator { background: var(--cv-color); box-shadow: 0 0 8px var(--cv-color); }
+    .card.nlp .track-indicator { background: var(--nlp-color); box-shadow: 0 0 8px var(--nlp-color); }
+    .card.genai .track-indicator { background: var(--genai-color); box-shadow: 0 0 8px var(--genai-color); }
+    .card.gpu .track-indicator { background: var(--gpu-color); box-shadow: 0 0 8px var(--gpu-color); }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.45;
+      flex-grow: 1;
+      transition: color 0.2s ease;
+    }
+
+    .card:hover .card-title {
+      color: #ffffff;
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .badge.cv { background: rgba(56, 189, 248, 0.08); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.15); }
+    .badge.nlp { background: rgba(52, 211, 153, 0.08); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.15); }
+    .badge.genai { background: rgba(167, 139, 250, 0.08); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.15); }
+    .badge.gpu { background: rgba(251, 146, 60, 0.08); color: #fdba74; border: 1px solid rgba(251, 146, 60, 0.15); }
+
+    .badge.diff {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .badge.diff.easy { color: var(--easy-color); background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.15); }
+    .badge.diff.medium { color: var(--medium-color); background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.15); }
+    .badge.diff.hard { color: var(--hard-color); background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.15); }
+
+    /* Details Panel */
+    .detail {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0);
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .detail.show {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      opacity: 1;
+      max-height: 380px;
+    }
+
+    .detail-section {
+      margin-bottom: 10px;
+    }
+
+    .detail-section:last-of-type {
+      margin-bottom: 14px;
+    }
+
+    .detail-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      font-weight: 700;
+      margin-bottom: 3px;
+      display: block;
+    }
+
+    .detail-content {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .stack-code {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-primary);
+      background: rgba(10, 14, 23, 0.5);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      display: inline-block;
+      word-break: break-all;
+    }
+
+    .ask-btn {
+      width: 100%;
+      margin-top: 4px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      background: rgba(167, 139, 250, 0.06);
+      color: #c4b5fd;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .ask-btn:hover {
+      background: rgba(167, 139, 250, 0.15);
+      border-color: rgba(167, 139, 250, 0.35);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(167, 139, 250, 0.12);
+    }
+
+    .ask-btn svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .ask-btn:hover svg {
+      transform: translateX(2px);
+    }
+
+    /* Empty State */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 2rem;
+      background: rgba(17, 24, 39, 0.2);
+      border: 1px dashed var(--border-color);
+      border-radius: 16px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      display: none;
+    }
+
+    .empty-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-tertiary);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="badge-featured">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 4px; vertical-align: middle;">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+        AI & GPU Summer Internship 2026
+      </div>
+      <h1>Capstone Project Ideas</h1>
+      <p>An interactive dashboard showcasing 30 advanced AI/GPU capstone project ideas. Use the filters or keywords search to explore problem statements, architectures, and tech stacks.</p>
+    </header>
+
+    <div class="controls">
+      <div class="filters">
+        <button class="filter-btn active all" onclick="filter('all', this)">All 30</button>
+        <button class="filter-btn cv" onclick="filter('cv', this)">Computer Vision</button>
+        <button class="filter-btn nlp" onclick="filter('nlp', this)">NLP</button>
+        <button class="filter-btn genai" onclick="filter('genai', this)">Generative AI</button>
+        <button class="filter-btn gpu" onclick="filter('gpu', this)">GPU Optimization</button>
+      </div>
+      <div class="search-sort-group">
+        <div class="search-wrapper">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input type="text" id="search" class="search-input" placeholder="Search title, stack, domain..." oninput="handleSearch(this.value)">
+          <button id="clear-search" class="clear-search-btn" style="display: none;" onclick="clearSearch()">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 1.5L10.5 10.5M10.5 1.5L1.5 10.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="sort-wrapper">
+          <select id="sort-difficulty" class="sort-select" onchange="handleSort(this.value)">
+            <option value="default">Sort: Default</option>
+            <option value="easy-hard">Difficulty: Easy to Hard</option>
+            <option value="hard-easy">Difficulty: Hard to Easy</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">
+      <div class="empty-icon">🔍</div>
+      No projects match the current filters or search term.
+    </div>
+  </div>
+
+  <script>
+    const projects = [
+      { id:1, track:"cv", title:"Pothole & road damage detection from smartphone photos", diff:"Medium", problem:"Municipalities lack affordable road monitoring systems.", stack:"ResNet-18 / YOLOv8 + CUDA inference", realworld:"Civic infrastructure, smart cities" },
+      { id:2, track:"cv", title:"Classroom attention monitoring using pose estimation", diff:"Medium", problem:"Teachers can't gauge engagement in large hybrid classrooms.", stack:"MediaPipe + GPU-accelerated inference", realworld:"EdTech, hybrid learning" },
+      { id:3, track:"cv", title:"Crop disease detection from leaf images", diff:"Easy", problem:"Farmers in rural India lose 30%+ yield to undetected plant disease.", stack:"CNN fine-tuning on PlantVillage dataset, H200", realworld:"AgriTech, food security" },
+      { id:4, track:"cv", title:"Real-time face mask & PPE compliance detection", diff:"Easy", problem:"Manual safety compliance checks in factories are slow and error-prone.", stack:"YOLOv8 + Nsight GPU profiling", realworld:"Industrial safety, manufacturing" },
+      { id:5, track:"cv", title:"Parking space occupancy detection from CCTV feeds", diff:"Easy", problem:"Urban parking causes 30% of city traffic congestion.", stack:"ResNet + GPU-batched inference pipeline", realworld:"Smart parking, urban mobility" },
+      { id:6, track:"cv", title:"Flood area mapping from satellite imagery", diff:"Hard", problem:"Disaster response teams lack rapid damage assessment tools.", stack:"Semantic segmentation (SegNet), HBM3e memory for large tiles", realworld:"Disaster management, climate response" },
+      { id:7, track:"cv", title:"Driver drowsiness & distraction detection", diff:"Medium", problem:"~30% of road accidents are fatigue-related.", stack:"Facial landmark CNN + real-time GPU pipeline", realworld:"Road safety, automotive" },
+      { id:8, track:"cv", title:"Handwritten Kannada/Tamil digit recognition", diff:"Easy", problem:"Regional script digitization for gov documents is a bottleneck.", stack:"Custom CNN trained on regional script datasets", realworld:"Digital governance, OCR" },
+      { id:9, track:"nlp", title:"Legal document summarizer for Indian court orders", diff:"Medium", problem:"Lawyers spend 60%+ time reading long court orders.", stack:"BERT fine-tuning + extractive summarization", realworld:"LegalTech, access to justice" },
+      { id:10, track:"nlp", title:"Multilingual hate speech detector for social media", diff:"Medium", problem:"Platforms struggle with regional-language abuse at scale.", stack:"BERT multilingual + QLoRA fine-tuning", realworld:"Content moderation, online safety" },
+      { id:11, track:"nlp", title:"Resume screening & job-fit scorer", diff:"Easy", problem:"HR teams manually screen thousands of applications.", stack:"BERT sentence embeddings + cosine similarity scoring", realworld:"HR automation, recruitment" },
+      { id:12, track:"nlp", title:"Student Q&A bot over university PDFs", diff:"Medium", problem:"Students waste hours digging through dense course documents.", stack:"RAG pipeline + BERT embeddings on H200", realworld:"EdTech, university tools" },
+      { id:13, track:"nlp", title:"Medical symptom checker with triage classification", diff:"Hard", problem:"Rural patients lack access to quick preliminary medical guidance.", stack:"LLAMA 3 4-bit QLoRA fine-tuned on symptom-disease pairs", realworld:"HealthTech, rural healthcare" },
+      { id:14, track:"nlp", title:"Financial news sentiment → stock movement predictor", diff:"Hard", problem:"Retail investors lack tools to interpret market-moving news.", stack:"BERT fine-tuning on financial corpora (FinBERT), GPU batching", realworld:"FinTech, algorithmic trading" },
+      { id:15, track:"nlp", title:"Code review assistant for student GitHub submissions", diff:"Medium", problem:"TAs struggle to give timely feedback to large CS classes.", stack:"LLAMA 3 QLoRA fine-tuned on code review comments", realworld:"EdTech, code education" },
+      { id:16, track:"nlp", title:"Low-resource language spell-checker (Kannada/Telugu)", diff:"Hard", problem:"Regional language typing tools lack grammar correction.", stack:"Transformer seq2seq fine-tuned on regional corpora", realworld:"Digital inclusion, regional languages" },
+      { id:17, track:"genai", title:"Personalized meal planner with recipe image generation", diff:"Medium", problem:"Dietitians can't personalise recommendations at scale.", stack:"SDXL image generation + LLM recipe logic, H200", realworld:"HealthTech, nutrition apps" },
+      { id:18, track:"genai", title:"AI-generated product mockup tool for small businesses", diff:"Medium", problem:"SMBs can't afford product photography or designers.", stack:"SDXL + ControlNet for structured product shots", realworld:"E-commerce, SMB tools" },
+      { id:19, track:"genai", title:"Accessibility image alt-text generator for websites", diff:"Easy", problem:"95% of websites have missing/poor alt-text for visually impaired users.", stack:"CLIP vision-language model + SDXL captioning", realworld:"Web accessibility, inclusion" },
+      { id:20, track:"genai", title:"Synthetic medical training data generator for rare diseases", diff:"Hard", problem:"Rare disease datasets are too small to train classifiers.", stack:"SDXL fine-tuned on anonymised medical images, privacy-preserving", realworld:"HealthTech, medical AI" },
+      { id:21, track:"genai", title:"Children's storybook illustrator from text prompts", diff:"Easy", problem:"Small publishers lack illustration budget for regional-language books.", stack:"SDXL + prompt engineering, Hugging Face pipelines", realworld:"Publishing, EdTech, regional content" },
+      { id:22, track:"genai", title:"AI interior design visualiser from room photos", diff:"Medium", problem:"Homeowners can't visualise redesigns without expensive architects.", stack:"SDXL img2img + ControlNet depth conditioning", realworld:"Real estate, home decor apps" },
+      { id:23, track:"genai", title:"Deepfake detection using artifact analysis", diff:"Hard", problem:"Deepfakes are proliferating in political & personal misuse cases.", stack:"CNN-based forensic classifier + SDXL synthetic data augmentation", realworld:"Media integrity, cybersecurity" },
+      { id:24, track:"genai", title:"Voice-to-visual explainer: generate diagrams from lectures", diff:"Hard", problem:"Students struggle to convert spoken lectures into visual notes.", stack:"Whisper ASR + LLM structuring + SDXL diagram generation", realworld:"EdTech, accessibility" },
+      { id:25, track:"gpu", title:"Benchmarking FlashAttention vs standard attention on H200", diff:"Medium", problem:"Teams don't know the real-world speedup of FlashAttention for their model sizes.", stack:"PyTorch custom kernels + Nsight profiling, H200 HBM3e", realworld:"MLOps, model deployment" },
+      { id:26, track:"gpu", title:"Mixed precision inference engine for edge deployment", diff:"Hard", problem:"Large models can't run on hospital/factory edge devices with limited RAM.", stack:"FP8/FP16 mixed precision + TensorRT quantisation analysis", realworld:"Healthcare IoT, edge AI" },
+      { id:27, track:"gpu", title:"GPU-accelerated graph neural network for fraud detection", diff:"Hard", problem:"Banks process billions of transactions; CPU-based GNNs are too slow.", stack:"PyTorch Geometric + CUDA tensor parallelism on H200", realworld:"FinTech, fraud prevention" },
+      { id:28, track:"gpu", title:"Profiling memory bottlenecks in large batch ResNet training", diff:"Medium", problem:"ML engineers waste days hand-tuning batch sizes and memory.", stack:"Nsight Systems + HBM3e bandwidth analysis, automated profiling script", realworld:"MLOps, cloud cost reduction" },
+      { id:29, track:"gpu", title:"Tensor parallelism speedup analysis for LLM serving", diff:"Hard", problem:"LLM serving at scale costs 10x more than necessary.", stack:"Multi-GPU tensor parallel inference + latency/throughput benchmarks", realworld:"LLM deployment, AI infrastructure" },
+      { id:30, track:"gpu", title:"Real-time ASR pipeline with GPU-optimised Whisper", diff:"Medium", problem:"Courtroom/hospital transcription tools are too slow for real-time use.", stack:"Whisper + CTranslate2/TensorRT, FlashAttention, H200 batching", realworld:"Legal, healthcare, accessibility" }
+    ];
+
+    const trackLabels = { cv:"Computer Vision", nlp:"NLP", genai:"Generative AI", gpu:"GPU Optimization" };
+    
+    const trackSvgs = {
+      cv: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>`,
+      nlp: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>`,
+      genai: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>`,
+      gpu: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>`
+    };
+
+    let currentFilter = "all";
+    let searchQuery = "";
+    let currentSort = "default";
+    let expanded = null;
+
+    function renderStats(data) {
+      const counts = { cv:0, nlp:0, genai:0, gpu:0 };
+      
+      data.forEach(p => {
+        if (counts[p.track] !== undefined) {
+          counts[p.track]++;
+        }
+      });
+      
+      document.getElementById("stats").innerHTML = Object.entries(counts).map(([t, c]) => `
+        <div class="stat" onclick="quickFilter('${t}')" style="cursor: pointer;" title="Filter by ${trackLabels[t]}">
+          <div class="stat-icon ${t}">
+            ${trackSvgs[t]}
+          </div>
+          <div class="stat-info">
+            <span>${c}</span>
+            <div class="stat-label">${trackLabels[t]}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderGrid(data) {
+      const grid = document.getElementById("grid");
+      const empty = document.getElementById("empty");
+      if (!data.length) { 
+        grid.innerHTML = ""; 
+        empty.style.display = "block"; 
+        return; 
+      }
+      empty.style.display = "none";
+      grid.innerHTML = data.map(p => `
+        <div class="card ${p.track} ${expanded === p.id ? 'expanded' : ''}" id="card-${p.id}" onclick="toggle(${p.id})">
+          <div class="card-top">
+            <div class="track-indicator"></div>
+            <div class="card-title">${p.title}</div>
+            <div class="card-num">#${p.id.toString().padStart(2, '0')}</div>
+          </div>
+          <div class="badges">
+            <span class="badge ${p.track}">${trackLabels[p.track]}</span>
+            <span class="badge diff ${p.diff.toLowerCase()}">${p.diff}</span>
+          </div>
+          <div class="detail ${expanded === p.id ? 'show' : ''}" id="detail-${p.id}">
+            <div class="detail-section">
+              <span class="detail-label">Problem Statement</span>
+              <div class="detail-content">${p.problem}</div>
+            </div>
+            <div class="detail-section">
+              <span class="detail-label">Tech Stack</span>
+              <div class="detail-content">
+                <code class="stack-code">${p.stack}</code>
+              </div>
+            </div>
+            <div class="detail-section">
+              <span class="detail-label">Real-World Domain</span>
+              <div class="detail-content">${p.realworld}</div>
+            </div>
+            <button class="ask-btn" onclick="ask(event, ${p.id})">
+              Ask AI about this project
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function filter(track, btn) {
+      currentFilter = track;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      if (btn) {
+        btn.classList.add("active");
+      } else {
+        const tBtn = document.querySelector(`.filter-btn.${track}`);
+        if (tBtn) tBtn.classList.add("active");
+      }
+      update();
+    }
+
+    function quickFilter(track) {
+      const btn = document.querySelector(`.filter-btn.${track}`);
+      if (currentFilter === track) {
+        filter('all', document.querySelector('.filter-btn.all'));
+      } else {
+        filter(track, btn);
+      }
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      const clearBtn = document.getElementById("clear-search");
+      if (val.length > 0) {
+        clearBtn.style.display = "flex";
+      } else {
+        clearBtn.style.display = "none";
+      }
+      update();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById("search");
+      input.value = "";
+      handleSearch("");
+    }
+
+    function handleSort(val) {
+      currentSort = val;
+      update();
+    }
+
+    function update() {
+      let filtered = projects.filter(p => {
+        const matchesTrack = currentFilter === "all" || p.track === currentFilter;
+        const q = searchQuery.toLowerCase().trim();
+        const matchesSearch = !q || 
+          p.title.toLowerCase().includes(q) || 
+          p.stack.toLowerCase().includes(q) || 
+          p.problem.toLowerCase().includes(q) ||
+          p.realworld.toLowerCase().includes(q) ||
+          trackLabels[p.track].toLowerCase().includes(q) ||
+          p.diff.toLowerCase().includes(q);
+        return matchesTrack && matchesSearch;
+      });
+
+      // Sort logic
+      if (currentSort !== "default") {
+        const diffWeights = { easy: 1, medium: 2, hard: 3 };
+        filtered.sort((a, b) => {
+          const weightA = diffWeights[a.diff.toLowerCase()] || 0;
+          const weightB = diffWeights[b.diff.toLowerCase()] || 0;
+          if (currentSort === "easy-hard") {
+            return weightA - weightB;
+          } else if (currentSort === "hard-easy") {
+            return weightB - weightA;
+          }
+          return 0;
+        });
+      }
+      
+      renderStats(filtered);
+      renderGrid(filtered);
+    }
+
+    function toggle(id) {
+      const detail = document.getElementById("detail-" + id);
+      const card = document.getElementById("card-" + id);
+      if (!detail || !card) return;
+      
+      if (detail.classList.contains("show")) {
+        detail.classList.remove("show");
+        card.classList.remove("expanded");
+        if (expanded === id) expanded = null;
+      } else {
+        if (expanded !== null) {
+          const prevDetail = document.getElementById("detail-" + expanded);
+          const prevCard = document.getElementById("card-" + expanded);
+          if (prevDetail) prevDetail.classList.remove("show");
+          if (prevCard) prevCard.classList.remove("expanded");
+        }
+        detail.classList.add("show");
+        card.classList.add("expanded");
+        expanded = id;
+      }
+    }
+
+    function ask(e, id) {
+      e.stopPropagation();
+      const p = projects.find(x => x.id === id);
+      if (typeof sendPrompt === 'function') {
+        sendPrompt(`Tell me more about the capstone project idea: "${p.title}" — what should the architecture look like, what dataset can I use, and how do I structure the technical report?`);
+      } else {
+        console.log(`Prompt query: Tell me more about the capstone project idea: "${p.title}"`);
+        alert(`AI Prompt requested for: "${p.title}"\n(This callback requires the host IDE environment to handle prompts.)`);
+      }
+    }
+
+    // Initial render
+    update();
+  </script>
+</body>
+</html>
